@@ -1,0 +1,18 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Python target: 3.11.x on Linux x86_64
+# CPU-only validation environment for Phase 1 model acquisition and ONNX preparation.
+
+torch==2.3.1+cpu
+torchvision==0.18.1+cpu
+torchxrayvision==1.4.0
+onnx==1.16.1
+onnxruntime==1.18.1
+numpy==1.26.4
+Pillow==10.4.0
+opencv-python-headless==4.10.0.84
+pandas==2.2.2
+matplotlib==3.9.1
+tqdm==4.66.4
+jsonschema==4.22.0
+pytest==8.3.2

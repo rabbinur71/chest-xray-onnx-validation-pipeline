@@ -1,0 +1,66 @@
+{
+  "dataset_name": "phase_1_controlled_validation_dataset",
+  "dataset_version": "1.0",
+  "phase": "Major Phase 1 - Sub-Phase 1.5",
+  "purpose": [
+    "baseline inference validation",
+    "onnx comparison validation",
+    "future c runtime verification",
+    "preprocessing reproducibility testing",
+    "gtk integration testing",
+    "deterministic regression validation"
+  ],
+  "dataset_policy": {
+    "single_image_only": true,
+    "offline_storage_only": true,
+    "deterministic_validation_required": true,
+    "modality": "chest_xray",
+    "accepted_formats": [
+      "png",
+      "jpg",
+      "jpeg"
+    ]
+  },
+  "categories": {
+    "normal": {
+      "expected_primary_findings": []
+    },
+    "pneumonia": {
+      "expected_primary_findings": [
+        "Pneumonia",
+        "Lung Opacity",
+        "Consolidation"
+      ]
+    },
+    "cardiomegaly": {
+      "expected_primary_findings": [
+        "Cardiomegaly",
+        "Enlarged Cardiomediastinum"
+      ]
+    },
+    "pleural_effusion": {
+      "expected_primary_findings": [
+        "Effusion"
+      ]
+    },
+    "pneumothorax": {
+      "expected_primary_findings": [
+        "Pneumothorax"
+      ]
+    }
+  },
+  "naming_standard": {
+    "pattern": "<category>_<index>.<extension>",
+    "examples": [
+      "normal_001.png",
+      "pneumonia_001.jpg",
+      "cardiomegaly_001.png"
+    ]
+  },
+  "future_requirements": {
+    "onnx_validation": true,
+    "c_runtime_validation": true,
+    "structured_report_validation": true,
+    "future_dicom_support": true
+  }
+}

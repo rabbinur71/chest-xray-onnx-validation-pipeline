@@ -1,0 +1,103 @@
+{
+  "dataset_version": "1.0",
+  "images": [
+    {
+      "image_id": "normal_001",
+      "category": "normal",
+      "filename": "normal_001.jpg",
+      "relative_path": "validation_dataset/normal/normal_001.jpg",
+      "format": "jpg",
+      "modality": "chest_xray",
+      "projection": "PA_or_AP",
+      "expected_primary_findings": [],
+      "expected_behavior": {
+        "pneumonia_probability": "low",
+        "effusion_probability": "low",
+        "cardiomegaly_probability": "low",
+        "pneumothorax_probability": "low"
+      },
+      "validation_usage": [
+        "baseline inference testing",
+        "preprocessing validation",
+        "onnx comparison",
+        "future c runtime verification",
+        "gtk integration testing"
+      ]
+    },
+    {
+      "image_id": "pneumonia_001",
+      "category": "pneumonia",
+      "filename": "pneumonia_001.jpeg",
+      "relative_path": "validation_dataset/pneumonia/pneumonia_001.jpeg",
+      "format": "jpeg",
+      "modality": "chest_xray",
+      "projection": "PA_or_AP",
+      "expected_primary_findings": [
+        "pneumonia"
+      ],
+      "expected_behavior": {
+        "pneumonia_probability": "high",
+        "effusion_probability": "low",
+        "cardiomegaly_probability": "low",
+        "pneumothorax_probability": "low"
+      },
+      "validation_usage": [
+        "baseline inference testing",
+        "preprocessing validation",
+        "onnx comparison",
+        "future c runtime verification",
+        "gtk integration testing"
+      ]
+    },
+    {
+      "image_id": "cardiomegaly_001",
+      "category": "cardiomegaly",
+      "filename": "cardiomegaly_001.jpg",
+      "relative_path": "validation_dataset/cardiomegaly/cardiomegaly_001.jpg",
+      "format": "jpg",
+      "modality": "chest_xray",
+      "projection": "PA_or_AP",
+      "expected_primary_findings": [
+        "cardiomegaly"
+      ],
+      "expected_behavior": {
+        "pneumonia_probability": "low",
+        "effusion_probability": "low",
+        "cardiomegaly_probability": "high",
+        "pneumothorax_probability": "low"
+      },
+      "validation_usage": [
+        "baseline inference testing",
+        "preprocessing validation",
+        "onnx comparison",
+        "future c runtime verification",
+        "gtk integration testing"
+      ]
+    },
+    {
+      "image_id": "pneumothorax_001",
+      "category": "pneumothorax",
+      "filename": "pneumothorax_001.jpeg",
+      "relative_path": "validation_dataset/pneumothorax/pneumothorax_001.jpeg",
+      "format": "jpeg",
+      "modality": "chest_xray",
+      "projection": "PA_or_AP",
+      "expected_primary_findings": [
+        "pneumothorax"
+      ],
+      "expected_behavior": {
+        "pneumonia_probability": "low",
+        "effusion_probability": "low",
+        "cardiomegaly_probability": "low",
+        "pneumothorax_probability": "high"
+      },
+      "validation_usage": [
+        "baseline inference testing",
+        "preprocessing validation",
+        "onnx comparison",
+        "future c runtime verification",
+        "gtk integration testing"
+      ]
+    }
+  ]
+}

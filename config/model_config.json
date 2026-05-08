@@ -1,0 +1,25 @@
+{
+  "project": "xray-doctor-assist",
+  "phase": "1",
+  "subphase": "1.3",
+  "primary_model": {
+    "provider": "TorchXRayVision",
+    "architecture": "DenseNet121",
+    "weights": "densenet121-res224-all",
+    "input_size": 224,
+    "expected_channels": 1,
+    "tensor_layout": "NCHW",
+    "apply_sigmoid": true,
+    "cache_dir": "models/torchxrayvision_cache"
+  },
+  "runtime": {
+    "device": "cpu",
+    "deterministic": true,
+    "torch_num_threads": 1
+  },
+  "artifacts": {
+    "metadata_path": "models/model_metadata.json",
+    "environment_report_path": "reports/environment_validation_report.json",
+    "model_download_report_path": "reports/model_download_report.json"
+  }
+}

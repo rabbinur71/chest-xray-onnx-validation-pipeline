@@ -1,0 +1,43 @@
+# Python bytecode and tooling caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Editor and OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local agent / workspace metadata
+.agents/
+.codex/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model download caches and failed local export artifacts
+models/torchxrayvision_cache/
+models/failed_exports/
+
+# Generated reports and one-off diagnostics
+reports/*.json
+validation_dataset/reports/*.json
+tmp_onnx_diagnostics/
+
+# Runtime logs and ad hoc scratch files
+*.log
+*.tmp

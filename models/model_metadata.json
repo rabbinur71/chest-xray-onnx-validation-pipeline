@@ -1,0 +1,33 @@
+{
+  "timestamp_utc": "2026-05-07T12:37:38.327419+00:00",
+  "provider": "TorchXRayVision",
+  "architecture": "DenseNet121",
+  "weights": "densenet121-res224-all",
+  "input_size": 224,
+  "expected_channels": 1,
+  "tensor_layout": "NCHW",
+  "apply_sigmoid": true,
+  "targets": [
+    "Atelectasis",
+    "Consolidation",
+    "Infiltration",
+    "Pneumothorax",
+    "Edema",
+    "Emphysema",
+    "Fibrosis",
+    "Effusion",
+    "Pneumonia",
+    "Pleural_Thickening",
+    "Cardiomegaly",
+    "Nodule",
+    "Mass",
+    "Hernia",
+    "Lung Lesion",
+    "Fracture",
+    "Lung Opacity",
+    "Enlarged Cardiomediastinum"
+  ],
+  "target_count": 18,
+  "torch_version": "2.3.1+cpu",
+  "torchxrayvision_version": "1.4.0"
+}
