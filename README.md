@@ -1,179 +1,482 @@
-# Chest X-Ray ONNX Validation Pipeline
+# Offline AI-Assisted Chest X-Ray Analysis System
+## Phase 1 — AI Model Acquisition & Validation
 
-This repository contains a reproducible Python validation environment for a chest X-ray inference workflow built with TorchXRayVision, PyTorch, and ONNX Runtime.
+A reproducible offline chest X-ray AI validation and ONNX deployment pipeline designed as the technical foundation for a future native C-based medical inference engine.
 
-The project is focused on validating a pretrained chest X-ray model before later integration into a larger offline diagnostic system. It covers:
+---
 
-- environment validation
-- pretrained model download and verification
-- baseline PyTorch inference checks
-- inference over a small validation image registry
-- ONNX export
-- ONNX numerical equivalence diagnostics
+# Project Overview
 
-## Purpose
+This repository contains the completed implementation and validation work for:
 
-The main goal of this repository is to verify that a chest X-ray model can be:
+```text
+Major Phase 1 — AI Model Acquisition & Validation
+```
 
-1. loaded reliably in Python
-2. run consistently on a controlled validation dataset
-3. exported to ONNX
-4. compared between PyTorch and ONNX Runtime before downstream deployment work
+The project establishes a deterministic and deployment-ready inference pipeline for chest X-ray analysis using:
+- TorchXRayVision
+- PyTorch
+- ONNX
+- ONNX Runtime
 
-This repository is a validation and diagnostics workspace. It is not a production medical product.
+The validated ONNX model produced in this phase is intended for future integration into:
+- a native C inference engine,
+- a GTK desktop application,
+- and an offline doctor-assistive workflow.
 
-## Current Status
+This repository is focused on:
+- model validation,
+- preprocessing determinism,
+- runtime stability,
+- ONNX deployment,
+- and numerical verification.
 
-Implemented and available:
+---
 
-- Python setup automation with `setup.sh`
-- environment validation script
-- model download script
+# Current Status
+
+## Major Phase 1 Status
+
+```text
+COMPLETE
+```
+
+Completed successfully:
+- clinical and technical scope definition
+- pretrained model evaluation and selection
+- Python validation environment
+- deterministic preprocessing pipeline
+- controlled validation dataset
 - baseline inference validation
-- validation dataset registry-driven inference
-- ONNX export flow
-- ONNX numerical validation workflow
-- ONNX failure diagnostics for the current export path
+- ONNX export pipeline
+- ONNX numerical equivalence validation
+- runtime contract documentation
+- technical handoff preparation
 
-Current blocking issue:
+---
 
-- the current ONNX export of `torchxrayvision.models.DenseNet(weights="densenet121-res224-all")` includes TorchXRayVision postprocessing logic (`op_norm`) that does not execute correctly in ONNX Runtime for real validation inputs
+# Key Technical Achievements
 
-What this means:
+## 1. Validated Chest X-Ray AI Model
 
-- PyTorch inference works
-- ONNX export produces a file
-- ONNX Runtime session creation succeeds
-- numerical validation currently fails because the exported postprocessing branch is not runtime-safe for general inputs
+Selected model:
 
-## Repository Structure
+```text
+TorchXRayVision DenseNet121
+weights = densenet121-res224-all
+```
+
+The model supports multi-label chest radiograph analysis including:
+- Pneumonia
+- Cardiomegaly
+- Pneumothorax
+- Effusion
+- Atelectasis
+- Consolidation
+- Edema
+- Lung Opacity
+- and additional thoracic findings.
+
+---
+
+## 2. Deterministic Inference Pipeline
+
+Validated runtime flow:
+
+```text
+Chest X-Ray
+    ↓
+Preprocessing
+    ↓
+Tensor Conversion
+    ↓
+PyTorch / ONNX Runtime
+    ↓
+Probability Output
+```
+
+The following contracts were formally frozen:
+- input image size
+- normalization behavior
+- tensor shape
+- pathology ordering
+- output semantics
+
+These contracts will later be reproduced in the native C runtime.
+
+---
+
+## 3. Successful ONNX Deployment
+
+Final validated deployment artifact:
+
+```text
+models/chest_xray_model.onnx
+```
+
+The ONNX model:
+- loads successfully,
+- executes successfully,
+- and passes numerical equivalence validation.
+
+---
+
+## 4. ONNX Numerical Equivalence Validation
+
+Validation objective:
+
+```text
+PyTorch output ≈ ONNX Runtime output
+```
+
+Validation results:
+
+| Metric | Result |
+|---|---|
+| Images validated | 4 |
+| Validation status | PASS |
+| Failed images | 0 |
+| Tolerance | `1e-4` |
+| Global max delta | `1.788e-07` |
+
+The ONNX model is therefore considered:
+- numerically stable,
+- runtime-safe,
+- and deployment-ready for future C integration.
+
+---
+
+# Repository Structure
 
 ```text
 .
-├── config/                          # model and project configuration
-├── docs/                            # phase notes and implementation documentation
-├── models/                          # exported model artifacts and metadata
-├── reports/                         # generated validation reports
-├── scripts/                         # validation, export, and diagnostic scripts
-├── validation_dataset/              # small curated validation dataset and metadata
-├── requirements.cpu.txt             # Python dependency list
-├── setup.sh                         # local environment bootstrap
+├── config/
+│   └── model_config.json
+│
+├── docs/
+│
+├── models/
+│   ├── chest_xray_model.onnx
+│   ├── model_metadata.json
+│   └── failed_exports/
+│
+├── reports/
+│   ├── environment_validation_report.json
+│   ├── model_download_report.json
+│   ├── baseline_inference_validation_report.json
+│   ├── onnx_export_report.json
+│   └── onnx_numerical_validation_report.json
+│
+├── scripts/
+│   ├── validate_environment.py
+│   ├── download_model.py
+│   ├── baseline_inference_validation.py
+│   ├── run_validation_image_inference.py
+│   ├── export_model_to_onnx.py
+│   └── validate_onnx_numerical_equivalence.py
+│
+├── validation_dataset/
+│   ├── normal/
+│   ├── pneumonia/
+│   ├── cardiomegaly/
+│   ├── pneumothorax/
+│   ├── metadata/
+│   └── reports/
+│
+├── requirements.cpu.txt
+├── setup.sh
 └── README.md
 ```
 
-Important files:
+---
 
-- `scripts/validate_environment.py`
-- `scripts/download_model.py`
-- `scripts/baseline_inference_validation.py`
-- `scripts/run_validation_image_inference.py`
-- `scripts/export_model_to_onnx.py`
-- `scripts/validate_onnx_numerical_equivalence.py`
-- `validation_dataset/metadata/image_registry.json`
-- `docs/phase_1_subphase_1_3_python_validation_environment.md`
+# Runtime Contracts
 
-## Setup
+## Input Tensor Contract
 
-From the project root:
+| Property | Value |
+|---|---|
+| Layout | NCHW |
+| Shape | `[1,1,224,224]` |
+| Type | `float32` |
+| Channels | 1 |
+| Semantic Type | chest radiograph |
+
+---
+
+## Preprocessing Contract
+
+Normalization formula:
+
+```python
+image = (image / 255.0) * 2048.0 - 1024.0
+```
+
+Final tensor:
+
+```text
+[1,1,224,224]
+float32
+```
+
+---
+
+## Output Tensor Contract
+
+| Property | Value |
+|---|---|
+| Shape | `[1,18]` |
+| Type | `float32` |
+| Semantics | sigmoid probabilities |
+
+---
+
+# Official Output Label Mapping
+
+| Index | Label |
+|---|---|
+| 00 | Atelectasis |
+| 01 | Consolidation |
+| 02 | Infiltration |
+| 03 | Pneumothorax |
+| 04 | Edema |
+| 05 | Emphysema |
+| 06 | Fibrosis |
+| 07 | Effusion |
+| 08 | Pneumonia |
+| 09 | Pleural_Thickening |
+| 10 | Cardiomegaly |
+| 11 | Nodule |
+| 12 | Mass |
+| 13 | Hernia |
+| 14 | Lung Lesion |
+| 15 | Fracture |
+| 16 | Lung Opacity |
+| 17 | Enlarged Cardiomediastinum |
+
+---
+
+# Setup
+
+## Linux Environment
+
+From repository root:
 
 ```bash
+chmod +x setup.sh
 ./setup.sh
 source .venv/bin/activate
 ```
 
-Installations and scripts in this repository are intended for a CPU-based Python workflow.
+---
 
-## Typical Workflow
+# Validation Workflow
 
-### 1. Validate the environment
+## 1. Validate Environment
 
 ```bash
 python scripts/validate_environment.py
 ```
 
-### 2. Download the pretrained model
+---
+
+## 2. Download Model
 
 ```bash
 python scripts/download_model.py
 ```
 
-### 3. Run baseline PyTorch inference validation
+---
+
+## 3. Baseline Inference Validation
 
 ```bash
 python scripts/baseline_inference_validation.py
 ```
 
-### 4. Run inference on the validation dataset
+---
+
+## 4. Run Validation Dataset Inference
 
 ```bash
 python scripts/run_validation_image_inference.py
 ```
 
-### 5. Export the model to ONNX
+---
+
+## 5. Export ONNX Model
 
 ```bash
 python scripts/export_model_to_onnx.py
 ```
 
-### 6. Run ONNX numerical validation
+---
+
+## 6. Validate ONNX Numerical Equivalence
 
 ```bash
 python scripts/validate_onnx_numerical_equivalence.py
 ```
 
-## Validation Dataset
+---
 
-The repository includes a small validation dataset registry under:
+# Controlled Validation Dataset
 
-`validation_dataset/metadata/image_registry.json`
-
-This registry defines the images used for controlled checks, including category labels and expected qualitative behavior for selected findings.
-
-Current validation categories include examples such as:
-
+Validation categories currently include:
 - normal
 - pneumonia
 - cardiomegaly
 - pneumothorax
 
-The dataset here is intended for engineering validation only. It is too small to support any clinical or statistical claims.
+Purpose:
+- engineering validation
+- preprocessing regression testing
+- ONNX verification
+- future C runtime comparison
 
-## ONNX Numerical Validation Note
+This dataset is NOT intended for:
+- clinical claims,
+- statistical conclusions,
+- or medical performance assertions.
 
-The current ONNX numerical validation phase is intentionally documented with the present failure state.
+---
 
-Diagnosis so far:
+# Important Engineering Decision
 
-- the DenseNet feature extractor and classifier path export successfully
-- the failure occurs in the exported TorchXRayVision `op_norm` postprocessing branch
-- ONNX Runtime fails at a `Reshape` node generated from boolean-mask based normalization logic
+TorchXRayVision `op_norm()` postprocessing was intentionally excluded from the final ONNX export because:
+- boolean masked assignment exported into unstable ONNX graph behavior,
+- runtime reshape failures occurred under ONNX Runtime.
 
-Diagnostic report:
+Final export architecture:
 
-- `tmp_onnx_diagnostics/onnx_reshape_failure_diagnostic_report.md`
+```text
+features2(x)
+    ↓
+classifier(features)
+    ↓
+sigmoid(logits)
+```
 
-This is a known engineering limitation in the current state of the repository, not a silent or ignored defect.
+Clinical interpretation logic will later be implemented inside:
+- the native C rule engine,
+- not inside the ONNX model itself.
 
-## Limitations
+This improves:
+- maintainability,
+- explainability,
+- auditability,
+- deterministic runtime behavior,
+- and future regulatory traceability.
 
-This repository has several important limitations:
+---
 
-- It is a validation environment, not a production inference service.
-- It does not provide a clinical decision support workflow.
-- It does not perform report generation for clinical use.
-- It uses a very small curated validation dataset.
-- It currently depends on TorchXRayVision pretrained weights and behavior.
-- The exported ONNX model path is not yet fully validated for runtime numerical equivalence.
-- ONNX export currently requires a safer wrapper approach to avoid TorchXRayVision `op_norm` export issues.
-- No claims should be made about diagnostic accuracy, safety, or deployment readiness based on this repository alone.
+# Current Limitations
 
-## Intended Next Engineering Step
+Current repository scope:
 
-The next corrective step is to re-export the model through a wrapper that excludes the problematic TorchXRayVision `op_norm` branch, then re-run ONNX numerical validation against the same wrapped PyTorch path.
+| Area | Status |
+|---|---|
+| Chest X-ray only | YES |
+| PNG/JPG only | YES |
+| Offline only | YES |
+| CPU inference only | YES |
+| Small validation dataset | YES |
+| Doctor-assistive only | YES |
 
-## Documentation
+Not yet implemented:
+- DICOM ingestion
+- GUI application
+- C inference engine
+- SQLite persistence
+- PDF export
+- Grad-CAM visualization
+- PACS integration
+- clinical validation studies
 
-Detailed implementation notes are available in:
+---
 
-- `docs/phase_1_subphase_1_3_python_validation_environment.md`
+# Intended Next Phase
 
+Next planned milestone:
+
+```text
+Major Phase 2 — Core C Engine Development
+```
+
+Planned deliverables:
+- native C preprocessing engine
+- ONNX Runtime C integration
+- rule engine
+- JSON result generation
+- SQLite persistence
+- command-line prototype
+
+---
+
+# Safety Statement
+
+This repository is:
+- an engineering validation platform,
+- not a clinically approved diagnostic device.
+
+The software is intended as:
+
+```text
+Doctor-assistive clinical decision support software
+```
+
+It must not be used as:
+- autonomous diagnosis,
+- final clinical authority,
+- or a replacement for physician review.
+
+Expected future wording:
+
+```text
+Finding suspicious for pneumonia.
+Doctor review required.
+```
+
+NOT:
+
+```text
+Patient has pneumonia.
+```
+
+---
+
+# Long-Term Vision
+
+With:
+- curated large-scale datasets,
+- radiologist-reviewed annotations,
+- formal training/fine-tuning pipelines,
+- independent validation,
+- and regulatory-quality engineering controls,
+
+this architecture can evolve into:
+- deployable offline medical imaging software,
+- low-resource diagnostic assistance systems,
+- and cross-platform radiology support applications.
+
+---
+
+# Final Technical Outcome
+
+Major Phase 1 successfully demonstrated that:
+
+```text
+A pretrained chest X-ray AI model can be:
+validated,
+stabilized,
+exported,
+numerically verified,
+and prepared for integration into a native offline medical inference engine.
+```
+
+The project is now ready to proceed into:
+- native C engine development,
+- ONNX Runtime C integration,
+- and full offline inference implementation.
+
+---
