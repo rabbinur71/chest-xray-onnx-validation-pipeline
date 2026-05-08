@@ -41,3 +41,6 @@ tmp_onnx_diagnostics/
 # Runtime logs and ad hoc scratch files
 *.log
 *.tmp
+
+# Excluding docs for personal reason
+docs/
