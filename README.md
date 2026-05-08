@@ -177,12 +177,3 @@ Detailed implementation notes are available in:
 
 - `docs/phase_1_subphase_1_3_python_validation_environment.md`
 
-## License and Usage
-
-Before publishing or distributing this repository, confirm:
-
-- the license terms for TorchXRayVision and its pretrained weights
-- the redistribution status of included validation images
-- whether generated model artifacts should be versioned in Git or released separately
-
-If this repository is going public, that review should happen before treating it as a sharable research or engineering asset.
