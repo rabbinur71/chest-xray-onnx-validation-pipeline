@@ -37,10 +37,8 @@ models/failed_exports/
 reports/*.json
 validation_dataset/reports/*.json
 tmp_onnx_diagnostics/
+docs/
 
 # Runtime logs and ad hoc scratch files
 *.log
 *.tmp
-
-# Excluding docs for personal reason
-docs/
