@@ -1,4 +1,6 @@
-# Python bytecode and tooling caches
+# ------------------------------------------------------------
+# Python caches and test tooling
+# ------------------------------------------------------------
 __pycache__/
 *.py[cod]
 *.pyo
@@ -9,36 +11,71 @@ __pycache__/
 .coverage
 .coverage.*
 htmlcov/
+.ipynb_checkpoints/
 
+# ------------------------------------------------------------
 # Virtual environments
+# ------------------------------------------------------------
 .venv/
 venv/
 env/
 ENV/
 
-# Editor and OS noise
+# ------------------------------------------------------------
+# Editor, OS, and local workspace metadata
+# ------------------------------------------------------------
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
-
-# Local agent / workspace metadata
 .agents/
 .codex/
+docs/
 
-# Jupyter
-.ipynb_checkpoints/
+# ------------------------------------------------------------
+# Native build output
+# Keep root build scripts tracked; ignore generated build trees.
+# ------------------------------------------------------------
+build/
+cmake-build-*/
 
-# Model download caches and failed local export artifacts
+# ------------------------------------------------------------
+# Runtime-generated data and validation artifacts
+# Keep source metadata tracked; ignore generated outputs.
+# ------------------------------------------------------------
+data/
+reports/final_reports/
+reports/preprocessing_validation/
+reports/onnx_c_runtime_validation/
+validation_dataset/reports/
+
+# Generated top-level reports
+reports/*.json
+
+# ------------------------------------------------------------
+# Model caches and failed export scratch space
+# Keep intentional release artifacts tracked unless explicitly excluded.
+# ------------------------------------------------------------
 models/torchxrayvision_cache/
 models/failed_exports/
 
-# Generated reports and one-off diagnostics
-reports/*.json
-validation_dataset/reports/*.json
-tmp_onnx_diagnostics/
-docs/
+# ------------------------------------------------------------
+# Packaging and compiled distribution artifacts
+# Keep installer/source packaging definitions tracked.
+# ------------------------------------------------------------
+dist/
+package/output/
+package/app/
 
-# Runtime logs and ad hoc scratch files
+# ------------------------------------------------------------
+# Downloaded third-party runtime bundles
+# ------------------------------------------------------------
+third_party/onnxruntime/
+
+# ------------------------------------------------------------
+# Temporary diagnostics and logs
+# ------------------------------------------------------------
+tmp_onnx_diagnostics/
 *.log
 *.tmp
+*.temp

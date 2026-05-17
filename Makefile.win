@@ -1,0 +1,61 @@
+# ============================================================
+# Windows Build Makefile
+# Project: XRayDoctorAssist
+# Toolchain: MXE MinGW-w64 shared
+# Target: 64-bit Windows GTK3 executable
+# ============================================================
+
+CC = x86_64-w64-mingw32.shared-gcc
+PKGCONFIG = x86_64-w64-mingw32.shared-pkg-config
+
+APP_NAME = XRayDoctorAssist
+OUT_DIR = dist/windows
+OUT = $(OUT_DIR)/$(APP_NAME).exe
+
+ONNXRUNTIME_WIN_ROOT = third_party/onnxruntime/onnxruntime-win-x64-1.18.1
+ONNXRUNTIME_INCLUDE = $(ONNXRUNTIME_WIN_ROOT)/include
+ONNXRUNTIME_LIB_DIR = $(ONNXRUNTIME_WIN_ROOT)/lib
+
+CFLAGS = \
+	`$(PKGCONFIG) --cflags gtk+-3.0 sqlite3` \
+	-Iinclude \
+	-I$(ONNXRUNTIME_INCLUDE) \
+	-DORT_DLL_IMPORT \
+	-std=gnu17 \
+	-Wall \
+	-Wextra \
+	-Werror \
+	-Wpedantic \
+	-O2
+
+LIBS = \
+	`$(PKGCONFIG) --libs gtk+-3.0 sqlite3` \
+	-L$(ONNXRUNTIME_LIB_DIR) \
+	-lonnxruntime \
+	-lm
+
+SRC = \
+	src/gui/main_gui.c \
+	src/ui/main_window.c \
+	src/engine/xray_engine.c \
+	src/engine/image_loader.c \
+	src/engine/preprocessor.c \
+	src/engine/preprocessor_validation.c \
+	src/engine/model_runner.c \
+	src/engine/model_output_validation.c \
+	src/engine/rule_engine.c \
+	src/export/result_formatter.c \
+	src/db/database.c \
+	src/utils/xray_status.c \
+	src/utils/xray_logger.c
+
+.PHONY: all clean check-dirs
+
+all: check-dirs
+	$(CC) $(SRC) $(CFLAGS) $(LIBS) -mwindows -o $(OUT)
+
+check-dirs:
+	mkdir -p $(OUT_DIR)
+
+clean:
+	rm -f $(OUT)

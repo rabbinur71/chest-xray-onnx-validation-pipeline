@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "model_output_count": 18,
+  "interpretation_policy": {
+    "not_suspected": "probability < low_threshold",
+    "low_suspicion": "low_threshold <= probability < medium_threshold",
+    "suspected": "medium_threshold <= probability < high_threshold",
+    "strongly_suspected": "probability >= high_threshold",
+    "doctor_review_required": true
+  },
+  "pathologies": [
+    { "index": 0, "name": "Atelectasis", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 1, "name": "Consolidation", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 2, "name": "Infiltration", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 3, "name": "Pneumothorax", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 4, "name": "Edema", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 5, "name": "Emphysema", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 6, "name": "Fibrosis", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 7, "name": "Effusion", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 8, "name": "Pneumonia", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 9, "name": "Pleural_Thickening", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 10, "name": "Cardiomegaly", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 11, "name": "Nodule", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 12, "name": "Mass", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 13, "name": "Hernia", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 14, "name": "Lung Lesion", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 15, "name": "Fracture", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 16, "name": "Lung Opacity", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 },
+    { "index": 17, "name": "Enlarged Cardiomediastinum", "low_threshold": 0.10, "medium_threshold": 0.30, "high_threshold": 0.60 }
+  ]
+}
